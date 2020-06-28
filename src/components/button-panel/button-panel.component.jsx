@@ -1,13 +1,26 @@
 import React from 'react';
 
-import './button-panel.styles.scss';
+import Button from '../button/button.component';
 
-const isOperator = val => val === '+' || val === '-' || val === '*' || val === '÷' || val === '=';
+const panels = [
+  ['AC', '+/-', '%', '÷'],
+  ['7', '8', '9', 'X'],
+  ['4', '5', '6', '-'],
+  ['1', '2', '3', '+'],
+  ['0', '.', '='],
+];
 
-const isZero = val => val === '0';
+const displayTabs = panels.map(panel => (
+  <div className="row" key={panel}>
+    {panel.map(
+      pan => <Button key={pan}>{pan}</Button>,
+    )}
+  </div>
+));
 
-const ButtonPanel = props => (
-  <div className={`button-panel ${isOperator(props.children) ? 'operator' : null} ${isZero(props.children) ? 'span' : null}`}>{props.children}
+const ButtonPanel = () => (
+  <div className="button-panel">
+    {displayTabs}
   </div>
 );
 
