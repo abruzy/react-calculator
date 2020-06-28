@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './display.styles.scss';
+import '../styles/scss/Display.scss';
 
 const Display = ({ result }) => (
   <div className="display">{result}</div>

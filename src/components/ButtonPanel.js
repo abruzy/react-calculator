@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../button/button.component';
+import Button from './Button';
 
 const panels = [
   ['AC', '+/-', '%', '÷'],
