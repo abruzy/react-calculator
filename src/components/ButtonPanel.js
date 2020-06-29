@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../styles/scss/ButtonPanel.scss';
+
 import Button from './Button';
 
 const panels = [
