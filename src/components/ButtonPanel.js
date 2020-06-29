@@ -13,7 +13,16 @@ const panels = [
 const displayTabs = panels.map(panel => (
   <div className="row" key={panel}>
     {panel.map(
-      pan => <Button key={pan}>{pan}</Button>,
+      pan => (
+        <Button
+          key={pan}
+          name={String(pan)}
+          color={pan === '+' || pan === '-' || pan === 'X' || pan === '÷' || pan === '='}
+          wide={pan === '0'}
+        >
+          {pan}
+        </Button>
+      ),
     )}
   </div>
 ));
