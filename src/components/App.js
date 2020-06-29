@@ -12,18 +12,17 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      total: '0',
       next: '0',
       operation: '',
-      result: '',
     };
   }
 
   render() {
+    const { next, operation} = this.state;
     return (
       <div className="App">
         <div className="calc-wrapper">
-          <Display>0</Display>
+          <Display result={next} operator={operation}>0</Display>
           <ButtonPanel />
         </div>
       </div>

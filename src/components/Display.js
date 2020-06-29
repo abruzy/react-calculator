@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 
 import '../styles/scss/Display.scss';
 
-const Display = ({ result }) => (
-  <div className="display">{result}</div>
+const Display = ({ result, operator }) => (
+  <div className="display">
+    {result}
+    {operator}
+  </div>
 );
 
 Display.defaultProps = {
   result: '0',
+  operator: '',
 };
 
 Display.propTypes = {
   result: PropTypes.string,
+  operator: PropTypes,
 };
 
 export default Display;
