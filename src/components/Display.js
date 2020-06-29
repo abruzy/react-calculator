@@ -17,7 +17,7 @@ Display.defaultProps = {
 
 Display.propTypes = {
   result: PropTypes.string,
-  operator: PropTypes,
+  operator: PropTypes.string,
 };
 
 export default Display;

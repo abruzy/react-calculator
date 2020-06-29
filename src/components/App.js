@@ -1,7 +1,5 @@
 import React from 'react';
 
-import calculate from '../logic/calculate';
-
 import '../styles/scss/App.scss';
 
 import Display from './Display';
@@ -18,7 +16,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { next, operation} = this.state;
+    const { next, operation } = this.state;
     return (
       <div className="App">
         <div className="calc-wrapper">
