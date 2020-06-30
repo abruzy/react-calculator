@@ -6,7 +6,7 @@ import '../styles/scss/Button.scss';
 const Button = ({
   name, color, wide, clickHandler,
 }) => (
-  <button type="button" className="button" style={{ backgroundColor: color ? '#f5913e' : '', flex: wide ? '27.5%' : '' }} onClick={() => clickHandler(name)}>{name}</button>
+  <button type="button" className="button" style={{ backgroundColor: color ? '#f5913e' : '', flex: wide ? '27.3%' : '' }} onClick={() => clickHandler(name)}>{name}</button>
 );
 
 Button.defaultProps = {
