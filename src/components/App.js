@@ -2,6 +2,8 @@ import React from 'react';
 
 import '../styles/scss/App.scss';
 
+import calculate from '../logic/calculate';
+
 import Display from './Display';
 import ButtonPanel from './ButtonPanel';
 
@@ -13,6 +15,12 @@ class App extends React.Component {
       next: '0',
       operation: '',
     };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(buttonName) {
+    this.setState(changeState => calculate(changeState, buttonName));
   }
 
   render() {
