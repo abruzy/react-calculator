@@ -13,6 +13,7 @@ class App extends React.Component {
 
     this.state = {
       next: '0',
+      total: '0',
       operation: '',
     };
 
