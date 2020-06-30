@@ -15,6 +15,7 @@ class App extends React.Component {
       next: '0',
       total: '0',
       operation: '',
+      result: '',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -25,11 +26,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { next, total, operation } = this.state;
+    const {
+      next, total, operation, result,
+    } = this.state;
+
     return (
       <div className="App">
         <div className="calc-wrapper">
-          <Display result={next} total={total} operator={operation} />
+          <Display next={next} total={total} operator={operation} result={result} />
           <ButtonPanel clickHandler={this.handleClick} />
         </div>
       </div>
