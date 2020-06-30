@@ -25,12 +25,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { next, operation } = this.state;
+    const { next, total, operation } = this.state;
     return (
       <div className="App">
         <div className="calc-wrapper">
-          <Display result={next} operator={operation}>0</Display>
-          <ButtonPanel />
+          <Display result={next} total={total} operator={operation} />
+          <ButtonPanel clickHandler={this.handleClick} />
         </div>
       </div>
     );

@@ -18,7 +18,7 @@ const calculate = (data, buttonName) => {
       next: parseFloat(next),
       operation,
     };
-    total = operate(newData.total, newData.next, operation).toFixed(2).toString();
+    total = operate(newData.total, newData.next, operation);
     next = null;
     result = total;
     if (buttonName !== '=') {

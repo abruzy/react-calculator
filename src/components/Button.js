@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import '../styles/scss/Button.scss';
 
-const Button = ({ name, color, wide }) => (
-  <div type="button" className="button" style={{ backgroundColor: color ? '#f5913e' : '', flex: wide ? '25%' : '' }}>{name}</div>
+const Button = ({
+  name, color, wide, clickHandler
+}) => (
+  <button type="button" className="button" style={{ backgroundColor: color ? '#f5913e' : '', flex: wide ? '27%' : '' }} onClick={() => clickHandler(name)}>{name}</button>
 );
 
 Button.defaultProps = {
