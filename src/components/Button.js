@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 
 import '../styles/scss/Button.scss';
 
-const isOperator = val => val === '+' || val === '-' || val === 'X' || val === '÷' || val === '=';
-
-const isZero = val => val === '0';
-
-const Button = ({ children }) => (
-  <div className={`button ${isOperator(children) ? 'operator' : null} ${isZero(children) ? 'span' : null}`}>
-    {children}
-  </div>
+const Button = ({ name, color, wide }) => (
+  <div type="button" className="button" style={{ backgroundColor: color ? '#f5913e' : '', flex: wide ? '25%' : '' }}>{name}</div>
 );
 
+Button.defaultProps = {
+  wide: false,
+  color: '#f5913e',
+};
+
 Button.propTypes = {
-  children: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  wide: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 export default Button;
