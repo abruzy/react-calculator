@@ -1,29 +1,16 @@
 import operate from './operate';
 
-const invertNumber = text => {
-  const value = text.split('');
-  if (value[0] === '-') {
-    value.shift();
-  } else {
-    value.unshift('-');
-  }
-  return value.join('');
-};
-
 const calculate = (data, buttonName) => {
   const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  const operators = ['X', '-', '+', '÷', '%', '+/-'];
-
+  const ops = ['X', '-', '+', '÷', '%'];
   let {
     total, next, operation, result,
   } = data;
-
   if (buttonName === '+/-') {
-    next = invertNumber(next);
     total *= (-1);
-    // next *= (-1);
-    result = total.toString();
-  } else if ((buttonName === '=' && operation) || (operators.includes(buttonName) && next && operation)) {
+    next *= (-1);
+    result = total;
+  } else if ((buttonName === '=' && operation) || (ops.includes(buttonName) && next && operation)) {
     const newData = {
       total: parseFloat(total),
       next: parseFloat(next),
@@ -32,21 +19,14 @@ const calculate = (data, buttonName) => {
     total = operate(newData.total, newData.next, operation);
     next = null;
     result = total;
-    if (buttonName !== '=') {
-      operation = buttonName;
-    } else {
-      operation = null;
-    }
+    if (buttonName !== '=') { operation = buttonName; } else { operation = null; }
   } else if (buttonName === 'AC') {
     total = null;
     next = null;
     result = null;
     operation = null;
   } else if (buttonName === '.') {
-    if (!next && !total) {
-      total = '0.';
-      next = '0.';
-    } else if (!next && operation) {
+    if (!next && !total) { total = '0.'; next = '0.'; } else if (!next && operation) {
       next = '0.';
     } else if (operation && total && next) {
       next += buttonName;
@@ -55,9 +35,7 @@ const calculate = (data, buttonName) => {
       total += '.';
     }
   } else if (nums.includes(buttonName)) {
-    if (!next && total) {
-      next = buttonName;
-    } else if (next && total && !operation) {
+    if (!next && total) { next = buttonName; } else if (next && total && !operation) {
       total += buttonName;
       next += buttonName;
     } else if (!next && operation) {
@@ -68,10 +46,8 @@ const calculate = (data, buttonName) => {
     } else if (next && operation) {
       next += buttonName;
     }
-  } else if (operators.includes(buttonName)) {
-    if (!operation && total) {
-      next = null; operation = buttonName;
-    }
+  } else if (ops.includes(buttonName)) {
+    if (!operation && total) { next = null; operation = buttonName; }
   } else if (buttonName === '%') {
     if (total && next && !operation) {
       total = operate(next, total, buttonName);
@@ -80,7 +56,6 @@ const calculate = (data, buttonName) => {
       next = operate(next, total, buttonName);
     }
   }
-
   return {
     total,
     next,
