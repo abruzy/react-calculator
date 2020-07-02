@@ -1,5 +1,15 @@
 import operate from './operate';
 
+const invertNumber = text => {
+  const value = text.split('');
+  if (value[0] === '-') {
+    value.shift();
+  } else {
+    value.unshift('-');
+  }
+  return value.join('');
+};
+
 const calculate = (data, buttonName) => {
   const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   const operators = ['X', '-', '+', '÷', '%', '+/-'];
@@ -9,8 +19,9 @@ const calculate = (data, buttonName) => {
   } = data;
 
   if (buttonName === '+/-') {
+    next = invertNumber(next);
     total *= (-1);
-    next *= (-1);
+    // next *= (-1);
     result = total.toString();
   } else if ((buttonName === '=' && operation) || (operators.includes(buttonName) && next && operation)) {
     const newData = {
