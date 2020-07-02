@@ -2,7 +2,7 @@ import operate from './operate';
 
 const calculate = (data, buttonName) => {
   const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  const operators = ['X', '-', '+', '÷'];
+  const operators = ['X', '-', '+', '÷', '%', '+/-'];
 
   let {
     total, next, operation, result,

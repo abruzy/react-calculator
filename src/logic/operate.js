@@ -17,7 +17,7 @@ const operate = (numberOne, numberTwo, operation) => {
       result = numberTwo === '0' ? 0 : Big(numberOne).div(numberTwo).toString();
       break;
     case '%':
-      result = Big(numberOne).div(Big(100)).toString();
+      result = Big(numberOne).div(Big(100)).times(numberTwo).toString();
       break;
     default:
       break;
