@@ -5,9 +5,9 @@ import '../styles/scss/Display.scss';
 
 const Display = ({ result, operator, next }) => (
   <div className="display">
-    {result}
-    {operator}
-    {next}
+    <div className="ops">{operator}</div>
+    <div className="nex">{next}</div>
+    <div className="res">{result}</div>
   </div>
 );
 
