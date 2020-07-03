@@ -7,12 +7,12 @@ const calculate = (data, buttonName) => {
     total, next, operation, result,
   } = data;
   if (buttonName === '+/-') {
+    next = '';
     total *= (-1);
-    next *= (-1);
-    result = total;
+    result = total.toString();
   } else if ((buttonName === '=' && operation) || (ops.includes(buttonName) && next && operation)) {
     const newData = {
-      total: parseFloat(total),
+      total: parseFloat(total).toString(),
       next: parseFloat(next),
       operation,
     };
