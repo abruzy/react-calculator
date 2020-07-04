@@ -1,80 +1,90 @@
+/* eslint-disable no-param-reassign */
 import operate from './operate';
 
-const calculate = (data, buttonName) => {
-  const nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  const operators = ['X', '-', '+', '÷'];
-
-  let {
-    total, next, operation, result,
-  } = data;
-
-  if (buttonName === '+/-') {
-    total *= (-1);
-    next *= (-1);
-    result = total.toString();
-  } else if ((buttonName === '=' && operation) || (operators.includes(buttonName) && next && operation)) {
-    const newData = {
-      total: parseFloat(total),
-      next: parseFloat(next),
-      operation,
-    };
-    total = operate(newData.total, newData.next, operation).toFixed(2).toString();
-    next = null;
-    result = total;
-    if (buttonName !== '=') {
-      operation = buttonName;
-    } else {
-      operation = null;
-    }
-  } else if (buttonName === 'AC') {
-    total = null;
-    next = null;
-    result = null;
-    operation = null;
-  } else if (buttonName === '.') {
-    if (!next && !total) {
-      total = '0.';
-      next = '0.';
-    } else if (!next && operation) {
-      next = '0.';
-    } else if (operation && total && next) {
-      next += buttonName;
-    } else if (!total.includes('.') && !next.includes('.')) {
-      next += '.';
-      total += '.';
-    }
-  } else if (nums.includes(buttonName)) {
-    if (!next && total) {
-      next = buttonName;
-    } else if (next && total && !operation) {
-      total += buttonName;
-      next += buttonName;
-    } else if (!next && operation) {
-      next = buttonName;
-    } else if (!next && !total) {
-      next = buttonName;
-      total = buttonName;
-    } else if (next && operation) {
-      next += buttonName;
-    }
-  } else if (operators.includes(buttonName)) {
-    if (!operation && total) {
-      next = null; operation = buttonName;
-    }
-  } else if (buttonName === '%') {
-    if (total && next && !operation) {
-      total = operate(next, total, buttonName);
-      result = total;
-    } else if (total && next && operation) {
-      next = operate(next, total, buttonName);
-    }
+const attatchButton = (target, adder) => {
+  const splitTarget = target.split('');
+  if (adder === '.' && splitTarget.includes(adder)) {
+    return target;
   }
+  if ((splitTarget[0] === '0') && (splitTarget.length === 1) && (adder === '.')) {
+    return (target + adder);
+  }
+  if ((splitTarget[0] === '0') && (splitTarget.length > 1) && (splitTarget[1] !== '.')) {
+    splitTarget.shift();
+    splitTarget.push(adder);
+    return splitTarget.join('');
+  }
+  if ((splitTarget[0] === '0') && (splitTarget.length === 1) && (splitTarget[1] !== '.')) {
+    splitTarget.shift();
+    splitTarget.push(adder);
+    return splitTarget.join('');
+  }
+  splitTarget.push(adder);
+  return splitTarget.join('');
+};
 
+const invertNumber = text => {
+  const value = text.split('');
+  const res = value[0] === '-' ? value.shift() && value.join('') : value.unshift('-') && value.join('');
+
+  return res;
+};
+
+const calculate = ({
+  total, next, operation, renderResult, errorOccurance,
+}, btnName) => {
+  switch (btnName) {
+    case 'AC':
+      total = '0';
+      next = '0';
+      operation = '';
+      renderResult = false;
+      errorOccurance = false;
+      break;
+    case '=':
+      if (!renderResult && !errorOccurance) {
+        total = operation ? operate(total, next, operation) : next;
+        next = total;
+        renderResult = true;
+        if (total === 'Infinity') {
+          total = '0';
+          errorOccurance = true;
+        }
+      }
+      operation = '';
+      break;
+    case '+/-':
+      next = invertNumber(next);
+      renderResult = false;
+      errorOccurance = false;
+      break;
+    case '÷':
+    case 'X':
+    case '-':
+    case '+':
+    case '%':
+      if (!renderResult && !errorOccurance) {
+        total = operation ? operate(total, next, operation) : next;
+        next = total;
+        renderResult = true;
+      }
+      if (total === 'Infinity') {
+        total = '0';
+        operation = '';
+        errorOccurance = true;
+      }
+      if (!errorOccurance) {
+        operation = btnName;
+      }
+      break;
+    default:
+      next = renderResult ? btnName : attatchButton(next, btnName);
+      renderResult = false;
+      errorOccurance = false;
+      break;
+  }
   return {
-    total,
-    next,
-    operation,
-    result,
+    total, next, operation, renderResult, errorOccurance,
   };
 };
 

@@ -12,8 +12,10 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      next: '0',
+      next: '',
+      total: '',
       operation: '',
+      result: '',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -24,12 +26,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { next, operation } = this.state;
+    const {
+      next, total, operation, result,
+    } = this.state;
+
     return (
       <div className="App">
         <div className="calc-wrapper">
-          <Display result={next} operator={operation}>0</Display>
-          <ButtonPanel />
+          <Display next={next} total={total} operator={operation} result={result} />
+          <ButtonPanel clickHandler={this.handleClick} />
         </div>
       </div>
     );
