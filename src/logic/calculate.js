@@ -22,15 +22,14 @@ const attatchButton = (target, adder) => {
   splitTarget.push(adder);
   return splitTarget.join('');
 };
+
 const invertNumber = text => {
   const value = text.split('');
-  if (value[0] === '-') {
-    value.shift();
-  } else {
-    value.unshift('-');
-  }
-  return value.join('');
+  const res = value[0] === '-' ? value.shift() && value.join('') : value.unshift('-') && value.join('');
+
+  return res;
 };
+
 const calculate = ({
   total, next, operation, renderResult, errorOccurance,
 }, btnName) => {
